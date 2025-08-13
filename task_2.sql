@@ -26,17 +26,18 @@ CREATE TABLE Customers (
     address TEXT
 );
 
--- Create Orders table (foreign key inline)
 CREATE TABLE Orders (
-    order_id INT PRIMARY KEY AUTO_INCREMENT,
-    customer_id INT NOT NULL REFERENCES Customers(customer_id),
-    order_date DATE NOT NULL
+    order_id INT AUTO_INCREMENT PRIMARY KEY,
+    customer_id INT NOT NULL,
+    order_date DATE NOT NULL,
+    FOREIGN KEY (customer_id) REFERENCES Customers(customer_id)
 );
 
--- Create Order_Details table (foreign keys inline)
 CREATE TABLE Order_Details (
-    orderdetailid INT PRIMARY KEY AUTO_INCREMENT,
-    order_id INT NOT NULL REFERENCES Orders(order_id),
-    book_id INT NOT NULL REFERENCES Books(book_id),
-    quantity DOUBLE NOT NULL
+    orderdetailid INT AUTO_INCREMENT PRIMARY KEY,
+    order_id INT NOT NULL,
+    book_id INT NOT NULL,
+    quantity DOUBLE NOT NULL,
+    FOREIGN KEY (order_id) REFERENCES Orders(order_id),
+    FOREIGN KEY (book_id) REFERENCES Books(book_id)
 );
